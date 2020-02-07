@@ -18,7 +18,7 @@ const jsforce = require('jsforce');
  * });
  */
 class ServiceCloud {
-	constructor (options) {
+	constructor(options) {
 		this.username = options.username;
 		this.password = options.password;
 		this.loginUrl = options.loginUrl;
@@ -30,7 +30,7 @@ class ServiceCloud {
 	 * @param  {Function} cb Function that is called as soon as work is done or an error occurs.
 	 * @private
 	 */
-	_login (cb) {
+	_login(cb) {
 		const self = this;
 
 		if (typeof self.conn.accessToken === 'undefined') {
@@ -38,7 +38,7 @@ class ServiceCloud {
 				loginUrl: self.loginUrl
 			});
 			self.conn.login(self.username, self.password, (e, info) => {
-				if (e)	return cb(e);
+				if (e) return cb(e);
 
 				self.conn = new jsforce.Connection({
 					instanceUrl: self.conn.instanceUrl,
@@ -47,7 +47,7 @@ class ServiceCloud {
 				self.conn.bulk.pollTimeout = 60000;
 				return cb(undefined);
 			});
-		} else	return cb(undefined);
+		} else return cb(undefined);
 	}
 
 	/**
@@ -56,7 +56,7 @@ class ServiceCloud {
 	 * @return {boolean}  True if there was a connection error, otherwise false.
 	 * @private
 	 */
-	_checkIfSessionIsExpired (e) {
+	_checkIfSessionIsExpired(e) {
 		const self = this;
 
 		if (e && e.errorCode.indexOf('INVALID_SESSION_ID') >= 0) {
@@ -72,16 +72,16 @@ class ServiceCloud {
 	 * @param  {string}   id The salesforce id of the instance of <INSERT YOUR OBJECT HERE> to query
 	 * @param  {Function} cb Function that is called as soon as work is done or an error occurs.
 	 */
-	retrieveFieldOfObject (id, cb) {
+	retrieveFieldOfObject(id, cb) {
 		// Check if valid 15 or 18 digit Salesforce-Id is given.
 		if (!/^([a-zA-Z0-9]{15}|[a-zA-Z0-9]{18})$/g.test(id)) return cb(new Error('Invalid Salesforce-Id given.'));
 
 		const self = this;
-		const query = 'SELECT <INSERT NAME OF FIELD HERE> FROM <INSERT YOUR OBJECT HERE> WHERE Id = \'' + id + '\'';
+		const query = 'SELECT INDID__c FROM branch__c WHERE Id = \'' + id + '\'';
 
 		// Login if necessary
 		self._login((e) => {
-			if (e)	return cb(e);
+			if (e) return cb(e);
 
 			// Try the query
 			self.conn.query(query, (e, r) => {
@@ -95,7 +95,7 @@ class ServiceCloud {
 				}
 
 				if (r.records.length === 1) {
-					return cb(undefined, r.records[0].<INSERT NAME OF FIELD HERE>);
+					return cb(undefined, r.records[0].INDID__c);
 				} else {
 					return cb(new Error('No unique result returned.'));
 				}
