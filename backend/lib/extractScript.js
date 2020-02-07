@@ -10,7 +10,7 @@ class MarketingCloud {
                 console.log(obj);
                 var i;
                 for (i = 0; i < Object.keys(obj.content).length; i++) {
-                    if (obj.content[i].CUSTOMER_INDID == id) {
+                    if (obj.content[i].CUSTOMER_INDID === id) {
                         // return res.status(200).json({
                         //     branchResult: obj.content[i].segmentValue
                         // });
