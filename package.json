@@ -1,5 +1,5 @@
 {
-  "name": "Service Cloud Backend",
+  "name": "service-cloud-backend",
   "version": "0.0.2",
   "description": "Backend for the Salesforce Service Cloud custom split activity",
   "main": "backend/server.js",
@@ -7,10 +7,10 @@
     "start": "node backend/server.js"
   },
   "dependencies": {
-    "body-parser": "^1.17.1",
-    "express": "^4.15.2",
-    "jsforce": "^1.7.1",
-    "jsonwebtoken": "^7.4.0"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jsforce": "^1.9.3",
+    "jsonwebtoken": "^7.4.3"
   },
   "options": {
     "salesforce": {
@@ -23,5 +23,15 @@
         "jwtSecret": "3-18GtKwfsKUIfaY-btx-NcDMmirbVrvn6jpYf46TVF3dHLEZ_6UhdPrQJVCNsR5qEp-hzT8hpJBUGa2gxpJOMJs7t36DZR-38XAk6UwUbe95ck88AwTkKaq9nXpYRMn-n647gfnlcye2K8TY6tJW-r_maGBAousfq2HNO4F3L5XLK6YCB7dcuT2HYnKnWIJeW-7gNbPQgGnfGphu6zmA3Fs6uDVdlS4aw9RNkKiKjB2R5YRmWczquLboQ7-Fw2"
       }
     }
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/varmishra/sfmc-servicecloud-customsplit.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/varmishra/sfmc-servicecloud-customsplit/issues"
+  },
+  "homepage": "https://github.com/varmishra/sfmc-servicecloud-customsplit#readme"
 }
