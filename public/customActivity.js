@@ -4,9 +4,14 @@ define(function (require) {
 	var Postmonger = require('postmonger');
 	var connection = new Postmonger.Session();
 	var payload = {};
-	var steps = [
-		{'key': 'eventdefinitionkey', 'label': 'Event Definition Key'},
-		{'key': 'idselection', 'label': 'ID Selection'}
+	var steps = [{
+			'key': 'eventdefinitionkey',
+			'label': 'Event Definition Key'
+		},
+		{
+			'key': 'idselection',
+			'label': 'ID Selection'
+		}
 	];
 	var currentStep = steps[0].key;
 	var eventDefinitionKey = '';
@@ -17,13 +22,13 @@ define(function (require) {
 		connection.trigger('requestInteraction');
 	});
 
-	function initialize (data) {
+	function initialize(data) {
 		if (data) {
 			payload = data;
 		}
 	}
 
-	function onClickedNext () {
+	function onClickedNext() {
 		if (currentStep.key === 'idselection') {
 			save();
 		} else {
@@ -31,16 +36,16 @@ define(function (require) {
 		}
 	}
 
-	function onClickedBack () {
+	function onClickedBack() {
 		connection.trigger('prevStep');
 	}
 
-	function onGotoStep (step) {
+	function onGotoStep(step) {
 		showStep(step);
 		connection.trigger('ready');
 	}
 
-	function showStep (step, stepIndex) {
+	function showStep(step, stepIndex) {
 		if (stepIndex && !step) {
 			step = steps[stepIndex - 1];
 		}
@@ -50,30 +55,30 @@ define(function (require) {
 		$('.step').hide();
 
 		switch (currentStep.key) {
-		case 'eventdefinitionkey':
-			$('#step1').show();
-			$('#step1 input').focus();
-			break;
-		case 'idselection':
-			$('#step2').show();
-			$('#step2 input').focus();
-			break;
+			case 'eventdefinitionkey':
+				$('#step1').show();
+				$('#step1 input').focus();
+				break;
+			case 'idselection':
+				$('#step2').show();
+				$('#step2 input').focus();
+				break;
 		}
 	}
 
-	function requestedInteractionHandler (settings) {
+	function requestedInteractionHandler(settings) {
 		try {
 			eventDefinitionKey = settings.triggers[0].metaData.eventDefinitionKey;
 			$('#select-entryevent-defkey').val(eventDefinitionKey);
 
 			if (settings.triggers[0].type === 'SalesforceObjectTriggerV2' &&
-					settings.triggers[0].configurationArguments &&
-					settings.triggers[0].configurationArguments.eventDataConfig) {
+				settings.triggers[0].configurationArguments &&
+				settings.triggers[0].configurationArguments.eventDataConfig) {
 
 				// This workaround is necessary as Salesforce occasionally returns the eventDataConfig-object as string
-				if (typeof settings.triggers[0].configurationArguments.eventDataConfig === 'stirng' ||
-							!settings.triggers[0].configurationArguments.eventDataConfig.objects) {
-						settings.triggers[0].configurationArguments.eventDataConfig = JSON.parse(settings.triggers[0].configurationArguments.eventDataConfig);
+				if (typeof settings.triggers[0].configurationArguments.eventDataConfig === 'string' ||
+					!settings.triggers[0].configurationArguments.eventDataConfig.objects) {
+					settings.triggers[0].configurationArguments.eventDataConfig = JSON.parse(settings.triggers[0].configurationArguments.eventDataConfig);
 				}
 
 				settings.triggers[0].configurationArguments.eventDataConfig.objects.forEach((obj) => {
@@ -102,14 +107,15 @@ define(function (require) {
 		}
 	}
 
-	function save () {
+	function save() {
 		payload['arguments'] = payload['arguments'] || {};
 		payload['arguments'].execute = payload['arguments'].execute || {};
 
 		var idField = deFields.length > 0 ? $('#select-id-dropdown').val() : $('#select-id').val();
+		var deField = deFields.length > 0 ? $('#select-id-dropdown').val() : $('#select-id-1').val();
 
 		payload['arguments'].execute.inArguments = [{
-			'serviceCloudId': '{{Event.' + eventDefinitionKey + '.\"' + idField + '\"}}'
+			'customerKey': '{{Contact.Attribute.' + deField + '.\"' + idField + '\"}}'
 		}];
 
 		payload['metaData'] = payload['metaData'] || {};
