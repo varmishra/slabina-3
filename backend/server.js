@@ -10,6 +10,9 @@ const verifyJwt = require(Path.join(__dirname, "lib", "jwt.js"));
 // and makes sure open connections are reused for subsequent requests.
 const ServiceCloud = require(Path.join(__dirname, "lib", "sfdc.js"));
 const sfdc = new ServiceCloud(Pkg.options.salesforce.serviceCloud);
+const MarketingCloud = require(Path.join(__dirname, "lib", "extractScript.js"));
+const sfmc = new MarketingCloud();
+
 
 const app = express();
 
@@ -33,8 +36,9 @@ app.post("/activity/execute", (req, res) => {
 			}
 
 			if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
-				let serviceCloudId;
+				let marketingCloudId;
 				var decodedArgs = decoded.inArguments[0];
+				marketingCloudId = decodedArgs.INDID;
 				// var url = "https://cors-anywhere.herokuapp.com/https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
 				// fetch(url)
 				// 	.then(function (response) {
@@ -62,27 +66,35 @@ app.post("/activity/execute", (req, res) => {
 				// write it to the serviceCloudId variable
 
 				// Call the function that retrieves desired data from Service Cloud
-				// sfdc.retrieveFieldOfObject(serviceCloudId, (err, fieldValue) => {
-				// 	if (err) {
-				// 		console.error(err);
-				// 		return res.status(500).end();
-				// 	}
+				sfmc.retrieveSegmentValue(marketingCloudId, (err, fieldValue) => {
+					if (err) {
+						console.error(err);
+						return res.status(500).end();
+					}
 
-				// 	// Check the returned value to make the decision which path should be
-				// 	// followed and return the branchResult accordingly.
-				// 	if (fieldValue === "verylikely") {
-				// 		return res.status(200).json({
-				// 			branchResult: "verylikely"
-				// 		});
-				// 	} else {
-				// 		return res.status(200).json({
-				// 			branchResult: "likely"
-				// 		});
-				// 	}
-				// });
-				return res.status(200).json({
-					branchResult: "verylikely"
-				})
+					// Check the returned value to make the decision which path should be
+					// followed and return the branchResult accordingly.
+					if (fieldValue === "verylikely") {
+						return res.status(200).json({
+							branchResult: "verylikely"
+						});
+					} else if (fieldValue === "likely") {
+						return res.status(200).json({
+							branchResult: "likely"
+						});
+					} else if (fieldValue === "unlikely") {
+						return res.status(200).json({
+							branchResult: "unlikely"
+						});
+					} else {
+						return res.status(200).json({
+							branchResult: "neutral"
+						});
+					}
+				});
+				// return res.status(200).json({
+				// 	branchResult: "verylikely"
+				// })
 			} else {
 				console.error("inArguments invalid.");
 				return res.status(400).end();
