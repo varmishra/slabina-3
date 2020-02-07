@@ -44,7 +44,7 @@
 	],
 	"outcomes": [{
 			"arguments": {
-				"branchResult": "verylikely"
+				"branchResult": "veryLikely"
 			},
 			"metaData": {
 				"label": "Very Likely"
@@ -52,7 +52,7 @@
 		},
 		{
 			"arguments": {
-				"branchResult": "Likely"
+				"branchResult": "likely"
 			},
 			"metaData": {
 				"label": "Likely"
