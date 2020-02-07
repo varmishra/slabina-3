@@ -39,7 +39,7 @@ app.post("/activity/execute", (req, res) => {
 				fetch(url)
 					.then(function (response) {
 						console.log(response);
-						//return response.json();
+						return response.json();
 					})
 					.then(function (obj) {
 						console.log(obj);
