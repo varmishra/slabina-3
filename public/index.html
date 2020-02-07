@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
 	<meta charset="utf-8">
-	<title>Service Cloud Custom Split</title>
+	<title>Hux Intelligent Segment</title>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script data-main="js/main.js" type="text/javascript" src="js/require.js"></script>
 
@@ -51,11 +52,13 @@
 		}
 	</style>
 </head>
+
 <body>
 	<div id="step1" class="step">
-		<p>Reading the event definition key of the journey's entry event..</p>
-		<p class="inputLabel">Event Definition Key</p>
-		<input id="select-entryevent-defkey" placeholder="journey entry event's event definition key" type="text" required="required" disabled="disabled" minlength="1" />
+		<p>Selecting the model type for Journey activity.</p>
+		<p class="inputLabel">Model Select</p>
+		<input id="select-entryevent-defkey" placeholder="journey entry event's event definition key" type="text"
+			required="required" disabled="disabled" minlength="1" />
 	</div>
 	<div id="step2" class="step">
 		<p>Please select the ID (event data column) to pass to the custom split backend.</p>
@@ -65,4 +68,5 @@
 		</select>
 	</div>
 </body>
+
 </html>
