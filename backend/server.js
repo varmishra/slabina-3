@@ -38,7 +38,8 @@ app.post("/activity/execute", (req, res) => {
 			if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
 				let marketingCloudId;
 				var decodedArgs = decoded.inArguments[0];
-				marketingCloudId = decodedArgs.INDID;
+				//marketingCloudId = decodedArgs.INDID;
+				marketingCloudId = "12345";
 				// var url = "https://cors-anywhere.herokuapp.com/https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
 				// fetch(url)
 				// 	.then(function (response) {
