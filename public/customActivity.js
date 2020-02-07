@@ -115,7 +115,7 @@ define(function (require) {
 		var deField = deFields.length > 0 ? $('#select-id-dropdown').val() : $('#select-id-1').val();
 
 		payload['arguments'].execute.inArguments = [{
-			'customerKey': '{{Contact.Attribute.' + deField + '.\"' + idField + '\"}}'
+			'customerKey': '{{Contact.Attribute.' + deField + '.' + idField + '}}'
 		}];
 
 		payload['metaData'] = payload['metaData'] || {};
