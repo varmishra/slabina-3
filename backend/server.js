@@ -46,9 +46,11 @@ app.post("/activity/execute", (req, res) => {
 						var i;
 						for (i = 0; i < Object.keys(obj.content).length; i++) {
 							if (obj.content[i].CUSTOMER_INDID == 12345) {
-								return res.status(200).json({
-									branchResult: obj.content[i].segmentValue
-								});
+								if (obj.content[i].segmentValue == "likely") {
+									return res.status(200).json({
+										branchResult: "likely"
+									});
+								}
 							}
 						}
 					})
