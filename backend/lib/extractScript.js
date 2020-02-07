@@ -23,4 +23,4 @@ class MarketingCloud {
     }
 }
 
-module.exports = MarketingCloud
+module.exports = MarketingCloud;
