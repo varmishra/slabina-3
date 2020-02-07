@@ -35,29 +35,29 @@ app.post("/activity/execute", (req, res) => {
 			if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
 				let serviceCloudId;
 				var decodedArgs = decoded.inArguments[0];
-				var url = "https://cors-anywhere.herokuapp.com/https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
-				fetch(url)
-					.then(function (response) {
-						console.log(response);
-						return response.json();
-					})
-					.then(function (obj) {
-						console.log(obj);
-						var i;
-						for (i = 0; i < Object.keys(obj.content).length; i++) {
-							if (obj.content[i].CUSTOMER_INDID == 12345) {
-								if (obj.content[i].segmentValue == "likely") {
-									return res.status(200).json({
-										branchResult: "likely"
-									});
-								}
-							}
-						}
-					})
-					.catch(function (error) {
-						console.error(error);
-						return res.status(400).end();
-					});
+				// var url = "https://cors-anywhere.herokuapp.com/https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
+				// fetch(url)
+				// 	.then(function (response) {
+				// 		console.log(response);
+				// 		return response.json();
+				// 	})
+				// 	.then(function (obj) {
+				// 		console.log(obj);
+				// 		var i;
+				// 		for (i = 0; i < Object.keys(obj.content).length; i++) {
+				// 			if (obj.content[i].CUSTOMER_INDID == 12345) {
+				// 				if (obj.content[i].segmentValue == "likely") {
+				// 					return res.status(200).json({
+				// 						branchResult: "likely"
+				// 					});
+				// 				}
+				// 			}
+				// 		}
+				// 	})
+				// 	.catch(function (error) {
+				// 		console.error(error);
+				// 		return res.status(400).end();
+				// 	});
 				// TODO: Read the Service Cloud object's Id from inArguments here and
 				// write it to the serviceCloudId variable
 
@@ -80,9 +80,9 @@ app.post("/activity/execute", (req, res) => {
 				// 		});
 				// 	}
 				// });
-				// return res.status(200).json({
-				// 	branchResult: "verylikely"
-				// })
+				return res.status(200).json({
+					branchResult: "verylikely"
+				})
 			} else {
 				console.error("inArguments invalid.");
 				return res.status(400).end();
