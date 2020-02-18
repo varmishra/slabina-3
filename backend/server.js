@@ -89,11 +89,12 @@ app.post("/activity/execute", (req, res) => {
 					// 		branchResult: "unlikely"
 					// 	});
 					// } else {
-						if(marketingCloudId === "12345"){
+					if(marketingCloudId == "12345"){
 					 	return res.status(200).json({
 							branchResult: "neutral"
 						});
-					}else{
+					}
+					else{
 							return res.status(200).json({
 								branchResult: "likely"
 							});
