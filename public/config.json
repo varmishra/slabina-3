@@ -1,5 +1,5 @@
 {
-	"key": "1f0dedec-9dc9-487b-8d89-214a3077fb13",
+	"key": "dde6366d-8c07-4b04-8b69-e6f055d0b342",
 	"metaData": {
 		"icon": "images/icon.png",
 		"iconSmall": "images/icon_small.png"
@@ -7,27 +7,27 @@
 	"type": "RESTDECISION",
 	"lang": {
 		"en-US": {
-			"name": "Slabina 1 Split",
+			"name": "Slabina 2 Split",
 			"description": "Custom Split activity that makes a decision based on data from Service Cloud"
 		}
 	},
 	"workflowApiVersion": "1.1",
 	"configurationArguments": {
-		"applicationExtensionKey": "1f0dedec-9dc9-487b-8d89-214a3077fb13",
+		"applicationExtensionKey": "dde6366d-8c07-4b04-8b69-e6f055d0b342",
 		"save": {
-			"url": "https://slabina-1.herokuapp.com/activity/save",
+			"url": "https://slabina-2.herokuapp.com/activity/save",
 			"verb": "POST",
 			"body": "",
 			"useJwt": true
 		},
 		"publish": {
-			"url": "https://slabina-1.herokuapp.com/activity/publish",
+			"url": "https://slabina-2.herokuapp.com/activity/publish",
 			"verb": "POST",
 			"body": "",
 			"useJwt": true
 		},
 		"validate": {
-			"url": "https://slabina-1.herokuapp.com/activity/validate",
+			"url": "https://slabina-2.herokuapp.com/activity/validate",
 			"verb": "POST",
 			"body": "",
 			"useJwt": true
@@ -87,7 +87,7 @@
 		"execute": {
 			"inArguments": [],
 			"outArguments": [],
-			"url": "https://slabina-1.herokuapp.com/activity/execute",
+			"url": "https://slabina-2.herokuapp.com/activity/execute",
 			"verb": "POST",
 			"body": "",
 			"header": "",
@@ -97,7 +97,7 @@
 		}
 	},
 	"edit": {
-		"url": "https://slabina-1.herokuapp.com/index.html",
+		"url": "https://slabina-2.herokuapp.com/index.html",
 		"height": 200,
 		"width": 500
 	}
