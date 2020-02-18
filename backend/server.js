@@ -40,7 +40,7 @@ app.post("/activity/execute", (req, res) => {
 				//let marketingCloudId;
 				//var decodedArgs = decoded.inArguments[0];
 				//marketingCloudId = decodedArgs.customerKey;
-				//marketingCloudId = "12345";
+				var marketingCloudId = "12345";
 				// var url = "https://cors-anywhere.herokuapp.com/https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
 				// fetch(url)
 				// 	.then(function (response) {
@@ -89,9 +89,15 @@ app.post("/activity/execute", (req, res) => {
 					// 		branchResult: "unlikely"
 					// 	});
 					// } else {
+						if(marketingCloudId === "12345"){
 					 	return res.status(200).json({
 							branchResult: "neutral"
 						});
+					}else{
+							return res.status(200).json({
+								branchResult: "likely"
+							});
+					}
 					//}
 				//});
 				// return res.status(200).json({
