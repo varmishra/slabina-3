@@ -1,5 +1,5 @@
 {
-	"key": "28b06691-f5e8-4d8e-b22a-2d287de3798c",
+	"key": "1f0dedec-9dc9-487b-8d89-214a3077fb13",
 	"metaData": {
 		"icon": "images/icon.png",
 		"iconSmall": "images/icon_small.png"
@@ -7,13 +7,13 @@
 	"type": "RESTDECISION",
 	"lang": {
 		"en-US": {
-			"name": "Slabina Custom Split",
+			"name": "Slabina 1 Split",
 			"description": "Custom Split activity that makes a decision based on data from Service Cloud"
 		}
 	},
 	"workflowApiVersion": "1.1",
 	"configurationArguments": {
-		"applicationExtensionKey": "28b06691-f5e8-4d8e-b22a-2d287de3798c",
+		"applicationExtensionKey": "1f0dedec-9dc9-487b-8d89-214a3077fb13",
 		"save": {
 			"url": "https://slabina-1.herokuapp.com/activity/save",
 			"verb": "POST",
