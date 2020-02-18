@@ -37,10 +37,10 @@ app.post("/activity/execute", (req, res) => {
 
 			if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
 				console.log(JSON.stringify(decoded.inArguments));
-				//let marketingCloudId;
-				//var decodedArgs = decoded.inArguments[0];
-				//marketingCloudId = decodedArgs.customerKey;
-				var marketingCloudId = "12345";
+				let marketingCloudId;
+				var decodedArgs = decoded.inArguments[0];
+				marketingCloudId = decodedArgs.customerKey;
+				// var marketingCloudId = "12345";
 				// var url = "https://cors-anywhere.herokuapp.com/https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
 				// fetch(url)
 				// 	.then(function (response) {
@@ -89,16 +89,37 @@ app.post("/activity/execute", (req, res) => {
 					// 		branchResult: "unlikely"
 					// 	});
 					// } else {
-					if(marketingCloudId == "12345"){
-					 	return res.status(200).json({
+					// if(marketingCloudId == "12345"){
+					//  	return res.status(200).json({
+					// 		branchResult: "neutral"
+					// 	});
+					// }
+					// else{
+					// 		return res.status(200).json({
+					// 			branchResult: "likely"
+					// 		});
+					// }
+					switch( String(marketingCloudId)){
+						case "12345": return res.status(200).json({
+							branchResult: "verylikely"
+						});
+						break;
+						case "12346": return res.status(200).json({
+							branchResult: "likely"
+						});
+						break;
+						case "12349": return res.status(200).json({
 							branchResult: "neutral"
 						});
+						break;
+						default: return res.status(200).json({
+							branchResult: "unlikely"
+						});
+						break;
+
 					}
-					else{
-							return res.status(200).json({
-								branchResult: "likely"
-							});
-					}
+
+
 					//}
 				//});
 				// return res.status(200).json({
