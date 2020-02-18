@@ -7,7 +7,7 @@
 	"type": "RESTDECISION",
 	"lang": {
 		"en-US": {
-			"name": "Service Cloud Custom Split",
+			"name": "Slabina Custom Split",
 			"description": "Custom Split activity that makes a decision based on data from Service Cloud"
 		}
 	},
