@@ -41,7 +41,7 @@ app.post("/activity/execute", (req, res) => {
 				var decodedArgs = decoded.inArguments[0];
 				marketingCloudId = decodedArgs.customerKey;
 				// var marketingCloudId = "12345";
-				var url = "https://cors-anywhere.herokuapp.com/https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
+				var url = "https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
 				fetch(url, {
 					headers: new Headers({
 						'Access-Control-Allow-Origin': '*'
