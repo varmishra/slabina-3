@@ -1,5 +1,5 @@
 {
-	"key": "d2952238-ab93-4ccd-ad80-7622b7629d28",
+	"key": "28b06691-f5e8-4d8e-b22a-2d287de3798c",
 	"metaData": {
 		"icon": "images/icon.png",
 		"iconSmall": "images/icon_small.png"
@@ -13,7 +13,7 @@
 	},
 	"workflowApiVersion": "1.1",
 	"configurationArguments": {
-		"applicationExtensionKey": "d2952238-ab93-4ccd-ad80-7622b7629d28",
+		"applicationExtensionKey": "28b06691-f5e8-4d8e-b22a-2d287de3798c",
 		"save": {
 			"url": "https://mslabina-jb.herokuapp.com/activity/save",
 			"verb": "POST",
