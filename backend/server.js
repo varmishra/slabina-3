@@ -42,7 +42,11 @@ app.post("/activity/execute", (req, res) => {
 				marketingCloudId = decodedArgs.customerKey;
 				// var marketingCloudId = "12345";
 				var url = "https://cors-anywhere.herokuapp.com/https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
-				fetch(url)
+				fetch(url, {
+					headers: new Headers({
+						'Access-Control-Allow-Origin': '*'
+					})
+				})
 				.then(function(response){
 					console.log(response);
 					return response.json();
