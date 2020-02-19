@@ -19,7 +19,7 @@ const fs = require("fs");
 const jsonPath = Path.join(__dirname, "lib", "jsonObject.json");
 var url = "https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
 const fetch = require("node-fetch");
-const fsx = require('fs-extra')
+const fsx = require('fs-extra');
 
 
 // Register middleware that parses the request payload.
@@ -203,3 +203,4 @@ app.use(express.static(Path.join(__dirname, "..", "public")));
 app.listen(process.env.PORT || 12345, () => {
 	console.log("Service Cloud customsplit backend is now running!");
 });
+	})
