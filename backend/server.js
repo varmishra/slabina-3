@@ -16,7 +16,7 @@ const sfmc = new MarketingCloud();
 
 const app = express();
 const fs = require("fs");
-const path = "./jsonObject.json";
+const jsonPath = require(Path.join(__dirname, "lib", "jsonObject.json"));
 var url = "https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
 const fetch = require("node-fetch");
 
@@ -39,34 +39,33 @@ app.post("/activity/execute", (req, res) => {
 				return res.status(401).end();
 			}
 			try {
-  					if (fs.existsSync(path)) {
-    				let rawdata = fs.readFileSync(path);
-					let student = JSON.parse(rawdata);
-					console.log('File exists');
-				  }
-				    else{
-    					fetch(url, {
-      headers: {
-        method: "GET",
-        dataType: "jsonp",
-        Accept: "jsonp",
-        crossDomain: "true",
-        jsonp: false
-      }
-    })
-      .then(function(response) {
-        //console.log(response);
-        return response.json();
-      })
-      .then(function(objt) {
-        console.log("storage start");
-        
-		let data = JSON.stringify(objt);
-		fs.writeFileSync("jsonObject.json", data);
-        //console.log(localStorage.getItem("jsonObject"));
-        console.log("storage end");
-      });
-  }
+  					if (fs.existsSync(jsonPath)) {
+              			let rawdata = fs.readFileSync(jsonPath);
+              			let student = JSON.parse(rawdata);
+              			console.log("File exists");
+            } else {
+              fetch(url, {
+                headers: {
+                  method: "GET",
+                  dataType: "jsonp",
+                  Accept: "jsonp",
+                  crossDomain: "true",
+                  jsonp: false
+                }
+              })
+                .then(function(response) {
+                  //console.log(response);
+                  return response.json();
+                })
+                .then(function(objt) {
+                  console.log("storage start");
+
+                  let data = JSON.stringify(objt);
+                  fs.writeFileSync("jsonObject.json", data);
+                  //console.log(localStorage.getItem("jsonObject"));
+                  console.log("storage end");
+                });
+            }
 } catch (err) {
   console.error(err);
 }
@@ -125,7 +124,7 @@ app.post("/activity/execute", (req, res) => {
          // .then(function(obj) {
 			//console.log(obj);
 			//obj = localStorage.getItem("jsonObject");
-			let rawdata = fs.readFileSync(path);
+			let rawdata = fs.readFileSync(jsonPath);
       		let student = JSON.parse(rawdata);
       		obj = student;
 			var i;
