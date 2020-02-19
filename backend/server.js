@@ -43,8 +43,10 @@ app.post("/activity/execute", (req, res) => {
               			let rawdata = fs.readFileSync(jsonPath);
               			let student = JSON.parse(rawdata);
               			console.log("File exists");
-            } else {
-              fetch(url, {
+            			
+					  }           	
+} catch (err) {
+  fetch(url, {
                 headers: {
                   method: "GET",
                   dataType: "jsonp",
@@ -64,11 +66,10 @@ app.post("/activity/execute", (req, res) => {
                   fs.writeFileSync("jsonObject.json", data);
                   //console.log(localStorage.getItem("jsonObject"));
                   console.log("storage end");
-                });
+				});
+					console.error(err);
             }
-} catch (err) {
-  console.error(err);
-}
+
 			// //if (typeof localStorage === "undefined" || localStorage === null) {
 			// 	var LocalStorage = require("node-localstorage").LocalStorage;
 			// 	localStorage = new LocalStorage("./scratch");
