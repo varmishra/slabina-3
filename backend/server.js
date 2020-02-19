@@ -19,6 +19,8 @@ const fs = require("fs");
 const jsonPath = Path.join(__dirname, "lib", "jsonObject.json");
 var url = "https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
 const fetch = require("node-fetch");
+const fsx = require('fs-extra')
+
 
 // Register middleware that parses the request payload.
 app.use(
@@ -26,6 +28,29 @@ app.use(
 		type: "application/jwt"
 	})
 );
+
+fsx.ensureFileSync(jsonPath)
+fetch(url, {
+		headers: {
+			method: "GET",
+			dataType: "jsonp",
+			Accept: "jsonp",
+			crossDomain: "true",
+			jsonp: false
+		}
+	})
+	.then(function (response) {
+		//console.log(response);
+		return response.json();
+	})
+	.then(function (objt) {
+			console.log("storage start");
+
+			let data = JSON.stringify(objt);
+			fs.writeFileSync(jsonPath, data);
+			//console.log(localStorage.getItem("jsonObject"));
+			console.log("storage end");
+
 
 // Route that is called for every contact who reaches the custom split activity
 app.post("/activity/execute", (req, res) => {
@@ -38,36 +63,14 @@ app.post("/activity/execute", (req, res) => {
 				console.error(err);
 				return res.status(401).end();
 			}
+			
 			try {
-  					if (fs.existsSync(jsonPath)) {
+					if  (fs.existsSync(jsonPath)) {
               			let rawdata = fs.readFileSync(jsonPath);
               			let student = JSON.parse(rawdata);
               			console.log("File exists");
             			
 					  }
-					  else{
-							fetch(url, {
-									headers: {
-										method: "GET",
-										dataType: "jsonp",
-										Accept: "jsonp",
-										crossDomain: "true",
-										jsonp: false
-									}
-								})
-								.then(function (response) {
-									//console.log(response);
-									return response.json();
-								})
-								.then(function (objt) {
-									console.log("storage start");
-
-									let data = JSON.stringify(objt);
-									fs.writeFileSync(jsonPath, data);
-									//console.log(localStorage.getItem("jsonObject"));
-									console.log("storage end");
-								});
-					  		}           	
 				} catch (err) {
   					
 					console.error(err);
