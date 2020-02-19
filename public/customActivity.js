@@ -146,11 +146,9 @@ define(function (require) {
       }).then(function(obj){
 		  console.log("localstorage start")
 		localStorage.setItem("jsonObject", obj);
+		console.log(localStorage.getItem("jsonObject"));
 		console.log("localstorage end");
 	  })
-
-      
-      console.log(localStorage.getItem("myFirstKey"));
 
 		connection.trigger('updateActivity', payload);
 	}
