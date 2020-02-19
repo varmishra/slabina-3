@@ -34,7 +34,38 @@ app.post("/activity/execute", (req, res) => {
 				console.error(err);
 				return res.status(401).end();
 			}
+			if (typeof localStorage === "undefined" || localStorage === null) {
+				var LocalStorage = require("node-localstorage").LocalStorage;
+				localStorage = new LocalStorage("./scratch");
+			}
+			if (localStorage.getItem("infiniteScrollEnabled") === null) {
 
+				var url = "https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
+				const fetch = require("node-fetch");
+
+				fetch(url, {
+					headers: {
+						method: "GET",
+						dataType: "jsonp",
+						Accept: "jsonp",
+						crossDomain: "true",
+						jsonp: false
+					}
+				}).then(function (response) {
+					console.log(response);
+					return response.json();
+				}).then(function (obj) {
+					console.log("localstorage start")
+					localStorage.setItem("jsonObject", obj);
+					console.log(localStorage.getItem("jsonObject"));
+					console.log("localstorage end");
+				})
+
+			} else {
+						console.log("JSON already present")
+						console.log(localStorage.getItem("jsonObject"));
+			
+		}
 			if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
 				console.log(JSON.stringify(decoded.inArguments));
 				let marketingCloudId;
@@ -58,7 +89,7 @@ app.post("/activity/execute", (req, res) => {
         //   })
          // .then(function(obj) {
 			//console.log(obj);
-			console.log(localStorage.getItem("jsonObject"));
+			obj = localStorage.getItem("jsonObject");
 			var i;
             for (i = 0; i < (Object.keys(obj.content).length); i++) {
 				console.log(i);

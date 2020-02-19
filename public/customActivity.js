@@ -123,33 +123,6 @@ define(function (require) {
 
 		console.log(JSON.stringify(payload));
 
-		if (typeof localStorage === "undefined" || localStorage === null) {
-        var LocalStorage = require("node-localstorage").LocalStorage;
-        localStorage = new LocalStorage("./scratch");
-      }
-	  
-	  	var url =
-              "https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
-		const fetch = require("node-fetch");
-		
-			fetch(url, {
-        headers: {
-          method: "GET",
-          dataType: "jsonp",
-          Accept: "jsonp",
-          crossDomain: "true",
-          jsonp: false
-        }
-      }).then(function(response) {
-        console.log(response);
-        return response.json();
-      }).then(function(obj){
-		  console.log("localstorage start")
-		localStorage.setItem("jsonObject", obj);
-		console.log(localStorage.getItem("jsonObject"));
-		console.log("localstorage end");
-	  })
-
 		connection.trigger('updateActivity', payload);
 	}
 
