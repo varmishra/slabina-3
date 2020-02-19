@@ -40,24 +40,25 @@ app.post("/activity/execute", (req, res) => {
 				let marketingCloudId;
 				var decodedArgs = decoded.inArguments[0];
 				marketingCloudId = decodedArgs.customerKey;
-				var url = "https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
-				const fetch = require("node-fetch");
+		// 		//var url = "https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
+		// 		const fetch = require("node-fetch");
 				try {
-				fetch(url, {
-          			headers: {
-            		method: "GET",
-            		dataType: "jsonp",
-            		Accept: "jsonp",
-            		crossDomain: "true",
-            		jsonp: false
-          			}
-        		})
-          .then(function(response) {
-            console.log(response);
-            return response.json();
-          })
-          .then(function(obj) {
-			console.log(obj);
+		// // 		fetch(url, {
+        //   			headers: {
+        //     		method: "GET",
+        //     		dataType: "jsonp",
+        //     		Accept: "jsonp",
+        //     		crossDomain: "true",
+        //     		jsonp: false
+        //   			}
+        // 		})
+        //   .then(function(response) {
+        //     console.log(response);
+        //     return response.json();
+        //   })
+         // .then(function(obj) {
+			//console.log(obj);
+			console.log(localStorage.getItem("jsonObject"));
 			var i;
             for (i = 0; i < (Object.keys(obj.content).length); i++) {
 				console.log(i);
@@ -90,7 +91,7 @@ app.post("/activity/execute", (req, res) => {
                 });
               }
             }
-		  });
+		  
 				} catch (err) {
 					console.log(err)
 				}
