@@ -40,7 +40,6 @@ app.post("/activity/execute", (req, res) => {
 				let marketingCloudId;
 				var decodedArgs = decoded.inArguments[0];
 				marketingCloudId = decodedArgs.customerKey;
-				// var marketingCloudId = "12345";
 				var url = "https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
 				const fetch = require("node-fetch");
 				try {
@@ -93,91 +92,7 @@ app.post("/activity/execute", (req, res) => {
 				} catch (err) {
 					console.log(err)
 				}
-				// fetch(url)
-				// 	.then(function (response) {
-				// 		console.log(response);
-				// 		return response.json();
-				// 	})
-				// 	.then(function (obj) {
-				// 		console.log(obj);
-				// 		var i;
-				// 		for (i = 0; i < Object.keys(obj.content).length; i++) {
-				// 			if (obj.content[i].CUSTOMER_INDID == 12345) {
-				// 				if (obj.content[i].segmentValue == "likely") {
-				// 					return res.status(200).json({
-				// 						branchResult: "likely"
-				// 					});
-				// 				}
-				// 			}
-				// 		}
-				// 	})
-				// 	.catch(function (error) {
-				// 		console.error(error);
-				// 		return res.status(400).end();
-				// 	});
-				// TODO: Read the Service Cloud object's Id from inArguments here and
-				// write it to the serviceCloudId variable
-
-				// Call the function that retrieves desired data from Service Cloud
-				//sfmc.retrieveSegmentValue(marketingCloudId, (err, fieldValue) => {
-				//	if (err) {
-				//		console.error(err);
-				//		return res.status(500).end();
-				//	}
-
-					// Check the returned value to make the decision which path should be
-					// followed and return the branchResult accordingly.
-					// if (fieldValue === "verylikely") {
-					// 	return res.status(200).json({
-					// 		branchResult: "verylikely"
-					// 	});
-					// } else if (fieldValue === "likely") {
-					// 	return res.status(200).json({
-					// 		branchResult: "likely"
-					// 	});
-					// } else if (fieldValue === "unlikely") {
-					// 	return res.status(200).json({
-					// 		branchResult: "unlikely"
-					// 	});
-					// } else {
-					// if(marketingCloudId == "12345"){
-					//  	return res.status(200).json({
-					// 		branchResult: "neutral"
-					// 	});
-					// }
-					// else{
-					// 		return res.status(200).json({
-					// 			branchResult: "likely"
-					// 		});
-					// }
-
-
-					// switch( String(marketingCloudId)){
-					// 	case "12345": return res.status(200).json({
-					// 		branchResult: "verylikely"
-					// 	});
-					// 	break;
-					// 	case "12346": return res.status(200).json({
-					// 		branchResult: "likely"
-					// 	});
-					// 	break;
-					// 	case "12349": return res.status(200).json({
-					// 		branchResult: "neutral"
-					// 	});
-					// 	break;
-					// 	default: return res.status(200).json({
-					// 		branchResult: "unlikely"
-					// 	});
-					// 	break;
-
-					// }
-
-
-					//}
-				//});
-				// return res.status(200).json({
-				// 	branchResult: "verylikely"
-				// })
+				
 			} else {
 				console.error("inArguments invalid.");
 				return res.status(400).end();
