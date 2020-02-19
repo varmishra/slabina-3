@@ -55,6 +55,14 @@ fetch(url, {
 		let data = fs.readFileSync(jsonPath);
 		let obj = JSON.parse(data);
 
+function getSegment(marketingCloudId) {
+	for (var i = 0; i < Object.keys(obj.content).length; i++) {
+		if (obj.content[i].CUSTOMER_INDID === marketingCloudId) {
+			return obj.content[i].segmentValue;
+		}
+	}
+}
+
 // Route that is called for every contact who reaches the custom split activity
 app.post("/activity/execute", (req, res) => {
 	verifyJwt(
@@ -75,27 +83,29 @@ app.post("/activity/execute", (req, res) => {
 						let marketingCloudId;
 						var decodedArgs = decoded.inArguments[0];
 						marketingCloudId = decodedArgs.customerKey;
-					var i;
-					for (i = 0; i < (Object.keys(obj.content).length); i++) {
-						console.log(i);
-					if (obj.content[i].CUSTOMER_INDID == "12347") {
-						console.log(obj.content[i].CUSTOMER_INDID);
-						switch (String(obj.content[i].segmentValue)) {
+						var segValue = getSegment(marketingCloudId);
+
+					// var i;
+					// for (i = 0; i < (Object.keys(obj.content).length); i++) {
+					// 	console.log(i);
+					// if (obj.content[i].CUSTOMER_INDID == "12347") {
+					// 	console.log(obj.content[i].CUSTOMER_INDID);
+						switch (segValue) {
 						case "verylikely":
 							return res.status(200).json({
 							branchResult: "verylikely"
 							});
-							continue;
+							break;
 						case "likely":
 							return res.status(200).json({
 							branchResult: "likely"
 							});
-							continue;
+							break;
 						case "neutral":
 							return res.status(200).json({
 							branchResult: "neutral"
 							});
-							continue;
+							break;
 						default:
 							return res.status(200).json({
 							branchResult: "unlikely"
@@ -106,13 +116,13 @@ app.post("/activity/execute", (req, res) => {
 						branchResult: "unlikely"
 						});
 					}
-					}
+					
 		  
 				} else {
 					console.error("inArguments invalid.");
 					return res.status(400).end();
 				}	
-			}
+			
 		}
 				catch (err) {
 					console.log(err)
