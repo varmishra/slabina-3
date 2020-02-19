@@ -42,44 +42,52 @@ app.post("/activity/execute", (req, res) => {
 				marketingCloudId = decodedArgs.customerKey;
 				// var marketingCloudId = "12345";
 				var url = "https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
+				const fetch = require("node-fetch");
 				fetch(url, {
-					headers: new Headers({
-						'Access-Control-Allow-Origin': '*'
-					})
-				})
-				.then(function(response){
-					console.log(response);
-					return response.json();
-				})
-				.then(function(obj){
-					console.log(obj);
-					for(i=0; i<Object.keys(obj.content); i++){
-						if(obj.content[i].CUSTOMER_INDID == "12345"){
-							switch(String(obj.content[i].segmentValue)){
-								case "verylikely": return res.status(200).json({
-									branchResult: "verylikely"
-								});
-									break;
-								case "likely": return res.status(200).json({
-									branchResult: "likely"
-								});
-									break;
-								case "neutral": return res.status(200).json({
-									branchResult: "neutral"
-								});
-									break;
-								default: return res.status(200).json({
-									branchResult: "unlikely"
-								});
-							}
-						}
-						else{
-							return res.status(200).json({
-								branchResult: "neutral"
-							});
-						}
-					}
-				})
+          			headers: {
+            		method: "GET",
+            		dataType: "jsonp",
+            		Accept: "jsonp",
+            		crossDomain: "true",
+            		jsonp: false
+          			}
+        		})
+          .then(function(response) {
+            console.log(response);
+            return response.json();
+          })
+          .then(function(obj) {
+            console.log(obj);
+            for (i = 0; i <= parseInt(Object.keys(obj.content)); i++) {
+              if (obj.content[i].CUSTOMER_INDID == "12345") {
+                switch (String(obj.content[i].segmentValue)) {
+                  case "verylikely":
+                    return res.status(200).json({
+                      branchResult: "verylikely"
+                    });
+                    break;
+                  case "likely":
+                    return res.status(200).json({
+                      branchResult: "likely"
+                    });
+                    break;
+                  case "neutral":
+                    return res.status(200).json({
+                      branchResult: "neutral"
+                    });
+                    break;
+                  default:
+                    return res.status(200).json({
+                      branchResult: "unlikely"
+                    });
+                }
+              } else {
+                return res.status(200).json({
+                  branchResult: "neutral"
+                });
+              }
+            }
+          });
 				// fetch(url)
 				// 	.then(function (response) {
 				// 		console.log(response);
