@@ -43,6 +43,7 @@ app.post("/activity/execute", (req, res) => {
 				// var marketingCloudId = "12345";
 				var url = "https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
 				const fetch = require("node-fetch");
+				try {
 				fetch(url, {
           			headers: {
             		method: "GET",
@@ -57,7 +58,8 @@ app.post("/activity/execute", (req, res) => {
             return response.json();
           })
           .then(function(obj) {
-            console.log(obj);
+			console.log(obj);
+			var i;
             for (i = 0; i <= parseInt(Object.keys(obj.content)); i++) {
               if (obj.content[i].CUSTOMER_INDID == "12345") {
                 switch (String(obj.content[i].segmentValue)) {
@@ -87,7 +89,10 @@ app.post("/activity/execute", (req, res) => {
                 });
               }
             }
-          });
+		  });
+				} catch (err) {
+					console.log(err)
+				}
 				// fetch(url)
 				// 	.then(function (response) {
 				// 		console.log(response);
