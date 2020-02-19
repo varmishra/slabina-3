@@ -44,29 +44,32 @@ app.post("/activity/execute", (req, res) => {
               			let student = JSON.parse(rawdata);
               			console.log("File exists");
             			
-					  }           	
-} catch (err) {
-  fetch(url, {
-                headers: {
-                  method: "GET",
-                  dataType: "jsonp",
-                  Accept: "jsonp",
-                  crossDomain: "true",
-                  jsonp: false
-                }
-              })
-                .then(function(response) {
-                  //console.log(response);
-                  return response.json();
-                })
-                .then(function(objt) {
-                  console.log("storage start");
+					  }
+					  else{
+							fetch(url, {
+									headers: {
+										method: "GET",
+										dataType: "jsonp",
+										Accept: "jsonp",
+										crossDomain: "true",
+										jsonp: false
+									}
+								})
+								.then(function (response) {
+									//console.log(response);
+									return response.json();
+								})
+								.then(function (objt) {
+									console.log("storage start");
 
-                  let data = JSON.stringify(objt);
-                  fs.writeFileSync("jsonObject.json", data);
-                  //console.log(localStorage.getItem("jsonObject"));
-                  console.log("storage end");
-				});
+									let data = JSON.stringify(objt);
+									fs.writeFileSync(jsonPath, data);
+									//console.log(localStorage.getItem("jsonObject"));
+									console.log("storage end");
+								});
+					  		}           	
+				} catch (err) {
+  					
 					console.error(err);
             }
 
