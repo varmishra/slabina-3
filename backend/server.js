@@ -48,7 +48,7 @@ fetch(url, {
 
 			let data = JSON.stringify(objt);
 			fs.writeFileSync(jsonPath, data);
-			//console.log(localStorage.getItem("jsonObject"));
+			console.log(JSON.parse("jsonObject"));
 			console.log("storage end");
 
 
@@ -68,7 +68,8 @@ app.post("/activity/execute", (req, res) => {
 					if  (fs.existsSync(jsonPath)) {
               			let rawdata = fs.readFileSync(jsonPath);
               			let student = JSON.parse(rawdata);
-              			console.log("File exists");
+						  console.log("File exists");
+						  console.log(student);
             			
 					  }
 				} catch (err) {
