@@ -40,12 +40,12 @@ app.post("/activity/execute", (req, res) => {
 			}
 			try {
   					if (fs.existsSync(path)) {
-    				//let rawdata = fs.readFileSync(path);
-					//let student = JSON.parse(rawdata);
+    				let rawdata = fs.readFileSync(path);
+					let student = JSON.parse(rawdata);
 					console.log('File exists');
 				  }
 				    else{
-    fetch(url, {
+    					fetch(url, {
       headers: {
         method: "GET",
         dataType: "jsonp",
@@ -61,8 +61,8 @@ app.post("/activity/execute", (req, res) => {
       .then(function(objt) {
         console.log("storage start");
         
-let data = JSON.stringify(objt);
-fs.writeFileSync("jsonObject.json", data);
+		let data = JSON.stringify(objt);
+		fs.writeFileSync("jsonObject.json", data);
         //console.log(localStorage.getItem("jsonObject"));
         console.log("storage end");
       });
