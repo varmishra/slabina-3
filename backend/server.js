@@ -15,6 +15,10 @@ const sfmc = new MarketingCloud();
 
 
 const app = express();
+const fs = require("fs");
+const path = "./jsonObject.json";
+var url = "https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
+const fetch = require("node-fetch");
 
 // Register middleware that parses the request payload.
 app.use(
@@ -34,38 +38,69 @@ app.post("/activity/execute", (req, res) => {
 				console.error(err);
 				return res.status(401).end();
 			}
-			//if (typeof localStorage === "undefined" || localStorage === null) {
-				var LocalStorage = require("node-localstorage").LocalStorage;
-				localStorage = new LocalStorage("./scratch");
-			//}
-			if (localStorage.getItem("jsonObject") === null) {
+			try {
+  					if (fs.existsSync(path)) {
+    				//let rawdata = fs.readFileSync(path);
+					//let student = JSON.parse(rawdata);
+					console.log('File exists');
+				  }
+				    else{
+    fetch(url, {
+      headers: {
+        method: "GET",
+        dataType: "jsonp",
+        Accept: "jsonp",
+        crossDomain: "true",
+        jsonp: false
+      }
+    })
+      .then(function(response) {
+        //console.log(response);
+        return response.json();
+      })
+      .then(function(objt) {
+        console.log("storage start");
+        
+let data = JSON.stringify(objt);
+fs.writeFileSync("jsonObject.json", data);
+        //console.log(localStorage.getItem("jsonObject"));
+        console.log("storage end");
+      });
+  }
+} catch (err) {
+  console.error(err);
+}
+			// //if (typeof localStorage === "undefined" || localStorage === null) {
+			// 	var LocalStorage = require("node-localstorage").LocalStorage;
+			// 	localStorage = new LocalStorage("./scratch");
+			// //}
+			// if (localStorage.getItem("jsonObject") === null) {
 
-				var url = "https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
-				const fetch = require("node-fetch");
+				
 
-				fetch(url, {
-					headers: {
-						method: "GET",
-						dataType: "jsonp",
-						Accept: "jsonp",
-						crossDomain: "true",
-						jsonp: false
-					}
-				}).then(function (response) {
-					console.log(response);
-					return response.json();
-				}).then(function (obj) {
-					console.log("localstorage start")
-					localStorage.setItem("jsonObject", JSON.stringify(obj.content));
-					console.log(lJSON.parse(localStorage.getItem("jsonObject")));
-					console.log("localstorage end");
-				})
+			// 	fetch(url, {
+			// 		headers: {
+			// 			method: "GET",
+			// 			dataType: "jsonp",
+			// 			Accept: "jsonp",
+			// 			crossDomain: "true",
+			// 			jsonp: false
+			// 		}
+			// 	}).then(function (response) {
+			// 		console.log(response);
+			// 		return response.json();
+			// 	}).then(function (obj) {
+			// 		console.log("localstorage start")
+			// 		localStorage.setItem("jsonObject", JSON.stringify(obj.content));
+			// 		console.log(lJSON.parse(localStorage.getItem("jsonObject")));
+			// 		console.log("localstorage end");
+			// 	})
 
-			} else {
-						console.log("JSON already present")
-						console.log(localStorage.getItem("jsonObject"));
+			// } else {
+			// 			console.log("JSON already present")
+			// 			//console.log(localStorage.getItem("jsonObject"));
 			
-		}
+		//}
 			if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
 				console.log(JSON.stringify(decoded.inArguments));
 				let marketingCloudId;
@@ -89,7 +124,10 @@ app.post("/activity/execute", (req, res) => {
         //   })
          // .then(function(obj) {
 			//console.log(obj);
-			obj = localStorage.getItem("jsonObject");
+			//obj = localStorage.getItem("jsonObject");
+			let rawdata = fs.readFileSync(path);
+      		let student = JSON.parse(rawdata);
+      		obj = student;
 			var i;
             for (i = 0; i < (Object.keys(obj.content).length); i++) {
 				console.log(i);
