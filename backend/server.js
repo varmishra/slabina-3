@@ -51,6 +51,8 @@ fetch(url, {
 			//console.log(JSON.parse("jsonObject"));
 			console.log("storage end");
 
+		let data = fs.readFileSync(jsonPath);
+		let obj = JSON.parse(data);
 
 // Route that is called for every contact who reaches the custom split activity
 app.post("/activity/execute", (req, res) => {
@@ -72,8 +74,6 @@ app.post("/activity/execute", (req, res) => {
 						let marketingCloudId;
 						var decodedArgs = decoded.inArguments[0];
 						marketingCloudId = decodedArgs.customerKey;
-					let data = fs.readFileSync(jsonPath);
-					let obj = JSON.parse(data);
 					var i;
 					for (i = 0; i < (Object.keys(obj.content).length); i++) {
 						console.log(i);
