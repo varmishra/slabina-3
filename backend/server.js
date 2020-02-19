@@ -46,10 +46,11 @@ fetch(url, {
 	.then(function (objt) {
 			console.log("storage start");
 
-			let data = JSON.stringify(objt);
-			fs.writeFileSync(jsonPath, data);
+			let rawdata = JSON.stringify(objt);
+			fs.writeFileSync(jsonPath, rawdata);
 			//console.log(JSON.parse("jsonObject"));
 			console.log("storage end");
+	})
 
 		let data = fs.readFileSync(jsonPath);
 		let obj = JSON.parse(data);
@@ -84,17 +85,17 @@ app.post("/activity/execute", (req, res) => {
 							return res.status(200).json({
 							branchResult: "verylikely"
 							});
-							break;
+							continue;
 						case "likely":
 							return res.status(200).json({
 							branchResult: "likely"
 							});
-							break;
+							continue;
 						case "neutral":
 							return res.status(200).json({
 							branchResult: "neutral"
 							});
-							break;
+							continue;
 						default:
 							return res.status(200).json({
 							branchResult: "unlikely"
@@ -145,4 +146,3 @@ app.use(express.static(Path.join(__dirname, "..", "public")));
 app.listen(process.env.PORT || 12345, () => {
 	console.log("Service Cloud customsplit backend is now running!");
 });
-	})
