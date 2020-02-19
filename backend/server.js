@@ -48,7 +48,7 @@ fetch(url, {
 
 			let data = JSON.stringify(objt);
 			fs.writeFileSync(jsonPath, data);
-			console.log(JSON.parse("jsonObject"));
+			//console.log(JSON.parse("jsonObject"));
 			console.log("storage end");
 
 
