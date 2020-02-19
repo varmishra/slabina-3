@@ -16,7 +16,7 @@ const sfmc = new MarketingCloud();
 
 const app = express();
 const fs = require("fs");
-const jsonPath = require(Path.join(__dirname, "lib", "jsonObject.json"));
+const jsonPath = Path.join(__dirname, "lib", "jsonObject.json");
 var url = "https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
 const fetch = require("node-fetch");
 
