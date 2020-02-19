@@ -22,7 +22,7 @@
 			display: none;
 		}
 
-		#step1 {
+		#step2 {
 			display: block;
 		}
 
@@ -82,8 +82,20 @@
 		</div>
 	</div>
 	<div id="step2" class="step">
-		<p>Please select the ID (event data column) to pass to the custom split backend.</p>
-		<p class="inputLabel">ID</p>
+		<!-- <p>Please select the ID (event data column) to pass to the custom split backend.</p>
+		<p class="inputLabel">ID</p> -->
+		<div class="slds-form-element">
+			<label class="slds-form-element__label" for="select-id">Data Extension</label>
+			<div class="slds-form-element__control">
+				<input type="date" id="select-id" class="slds-input" placeholder="Enter DE to pass to the backend" />
+			</div>
+		</div>
+		<div class="slds-form-element">
+			<label class="slds-form-element__label" for="select-id-1">ID</label>
+			<div class="slds-form-element__control">
+				<input type="date" id="select-id-1" class="slds-input" placeholder="Enter ID to pass to the backend" />
+			</div>
+		</div>
 		<input id="select-id" placeholder="ID to pass to the backend" type="text" />
 		<input id="select-id-1" placeholder="DE to pass to the backend" type="text" />
 		<select id="select-id-dropdown">
