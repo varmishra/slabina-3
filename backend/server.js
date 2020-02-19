@@ -34,11 +34,11 @@ app.post("/activity/execute", (req, res) => {
 				console.error(err);
 				return res.status(401).end();
 			}
-			if (typeof localStorage === "undefined" || localStorage === null) {
+			//if (typeof localStorage === "undefined" || localStorage === null) {
 				var LocalStorage = require("node-localstorage").LocalStorage;
 				localStorage = new LocalStorage("./scratch");
-			}
-			if (localStorage.getItem("infiniteScrollEnabled") === null) {
+			//}
+			if (localStorage.getItem("jsonObject") === null) {
 
 				var url = "https://amc-creative-content.mgnt-xspdev.in/intelligent-segments/click_conversion/hux_intelligent_segment-2_6_2020.json";
 				const fetch = require("node-fetch");
@@ -56,8 +56,8 @@ app.post("/activity/execute", (req, res) => {
 					return response.json();
 				}).then(function (obj) {
 					console.log("localstorage start")
-					localStorage.setItem("jsonObject", obj);
-					console.log(localStorage.getItem("jsonObject"));
+					localStorage.setItem("jsonObject", JSON.stringify(obj.content));
+					console.log(lJSON.parse(localStorage.getItem("jsonObject")));
 					console.log("localstorage end");
 				})
 
