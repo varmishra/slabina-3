@@ -59,10 +59,10 @@ app.post("/activity/execute", (req, res) => {
           .then(function(obj) {
 			console.log(obj);
 			var i;
-            for (i = 0; i < parseInt(Object.keys(obj.content)); i++) {
+            for (i = 0; i < (Object.keys(obj.content).length); i++) {
 				console.log(i);
               if (obj.content[i].CUSTOMER_INDID == "12345") {
-				  console.log(obj.content[i].CUSTOMER_INDID);
+				 console.log(obj.content[i].CUSTOMER_INDID);
                 switch (String(obj.content[i].segmentValue)) {
                   case "verylikely":
                     return res.status(200).json({
